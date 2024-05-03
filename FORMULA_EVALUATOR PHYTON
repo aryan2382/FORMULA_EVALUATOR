@@ -1,0 +1,188 @@
+#MATHS CALCULATOR
+# Function to add two numbers
+def add(x, y):
+    return x + y
+
+# Function to subtract two numbers
+def subtract(x, y):
+    return x - y
+
+# Function to multiply two numbers
+def multiply(x, y):
+    return x * y
+
+# Function to divide two numbers
+def divide(x, y):
+    return x / y if y != 0 else 'Error: Division by zero'
+
+# Main program
+def main():
+    print("Welcome to the Mathematis Formula Calculator!")
+    
+    print("Select operation:")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+
+    while True:
+        # Take input from the user
+        choice = input("Enter choice (1/2/3/4): ")
+
+        # Check if choice is one of the four options
+        if choice in ('1', '2', '3', '4'):
+            num1 = float(input("Enter first number: "))
+            num2 = float(input("Enter second number: "))
+
+            if choice == '1':
+                print(f"{num1} + {num2} = {add(num1, num2)}")
+            elif choice == '2':
+                print(f"{num1} - {num2} = {subtract(num1, num2)}")
+            elif choice == '3':
+                print(f"{num1} * {num2} = {multiply(num1, num2)}")
+            elif choice == '4':
+                print(f"{num1} / {num2} = {divide(num1, num2)}")
+
+            # Check if user wants another calculation
+            next_calculation = input("Let's do another calculation? (yes/no): ")
+            if next_calculation.lower() != 'yes':
+                break
+        else:
+            print("Invalid Input")
+
+if __name__ == "__main__":
+    main()
+
+#PHYSICS CALCULATOR
+
+def calculate_velocity(distance, time):
+    """
+    Calculating velocity using : velocity = distance / time
+    
+    """
+    velocity = distance / time
+    return velocity
+
+def calculate_acceleration(initial_velocity, final_velocity, time):
+    """
+    Calculating acceleration using : acceleration = (final_velocity - initial_velocity) / time
+    
+    """
+    acceleration = (final_velocity - initial_velocity) / time
+    return acceleration
+
+def calculate_force(mass, acceleration):
+    """
+    Calculating force using : force = mass * acceleration
+    
+    """
+    force = mass * acceleration
+    return force
+
+def calculate_work(force, distance):
+    """
+    Calculating work using : work = force * distance
+    
+    """
+    work = force * distance
+    return work
+
+def calculate_energy(mass, velocity):
+    """
+    Calculate kinetic energy using : kinetic_energy = 0.5 * mass * velocity^2
+    
+    """
+    kinetic_energy = 0.5 * mass * velocity ** 2
+    return kinetic_energy
+
+
+
+if __name__ == "__main__":
+    print("Welcome to the Physics Formula Calculator!")
+    print("Choose an option:")
+    print("1. Calculate Velocity")
+    print("2. Calculate Acceleration")
+    print("3. Calculate Force")
+    print("4. Calculate Work")
+    print("5. Calculate Kinetic Energy")
+    # as per need add more options for other formulas as needed...
+
+    choice = int(input("Enter your choice (1/2/3/4/5): "))
+    
+    if choice == 1:
+        distance = float(input("Enter distance (m): "))
+        time = float(input("Enter time (s): "))
+        print("Velocity:", calculate_velocity(distance, time), "m/s")
+    elif choice == 2:
+        initial_velocity = float(input("Enter initial velocity (m/s): "))
+        final_velocity = float(input("Enter final velocity (m/s): "))
+        time = float(input("Enter time (s): "))
+        print("Acceleration:", calculate_acceleration(initial_velocity, final_velocity, time), "m/s^2")
+    elif choice == 3:
+        mass = float(input("Enter mass (kg): "))
+        acceleration = float(input("Enter acceleration (m/s^2): "))
+        print("Force:", calculate_force(mass, acceleration), "N")
+    elif choice == 4:
+        force = float(input("Enter force (N): "))
+        distance = float(input("Enter distance (m): "))
+        print("Work:", calculate_work(force, distance), "J")
+    elif choice == 5:
+        mass = float(input("Enter mass (kg): "))
+        velocity = float(input("Enter velocity (m/s): "))
+        print("Kinetic Energy:", calculate_energy(mass, velocity), "J")
+    # if want add more elif blocks for other formulas as needed...
+    else:
+        print("Invalid choice. Please enter a valid option.")
+        compound = input("Enter the chemical compound formula: ")
+        molecular_weight = calculate_molecular_weight(compound)
+        if molecular_weight is not None:
+            print("The molecular weight of {} is {:.3f} g/mol.".format(compound, molecular_weight))
+#CHEMISTRY CALCULATOR
+# Periodic table of elements with atomic masses
+periodic_table = {
+    'H': 1.008, 'He': 4.0026, 'Li': 6.94, 'Be': 9.0122, 'B': 10.81, 'C': 12.011, 'N': 14.007,
+    'O': 15.999, 'F': 18.998, 'Ne': 20.180, 'Na': 22.990, 'Mg': 24.305, 'Al': 26.982,
+    # Add all other elements needed
+}
+
+# Function to calculate molar mass of a compound
+def calculate_molar_mass(formula):
+    mass = 0
+    elements = split_formula(formula)
+    for element, quantity in elements.items():
+        mass += periodic_table[element] * quantity
+    return mass
+
+# Helper function to split the formula into elements and their quantities
+def split_formula(formula):
+    import re
+    pattern = r'([A-Z][a-z]*)(\d*)'
+    elements = re.findall(pattern, formula)
+    elements_dict = {}
+    for element, quantity in elements:
+        if quantity == '':
+            quantity = 1
+        else:
+            quantity = int(quantity)
+        if element in elements_dict:
+            elements_dict[element] += quantity
+        else:
+            elements_dict[element] = quantity
+    return elements_dict
+
+# Function to convert mass to moles
+def mass_to_moles(mass, formula):
+    molar_mass = calculate_molar_mass(formula)
+    moles = mass / molar_mass
+    return moles
+
+
+print("Welcome to the CHEMISTRY Formula Calculator!")
+compound_formula = input("Enter the chemical formula of the compound: ")
+compound_mass = float(input("Enter the mass of the compound in grams: "))
+
+molar_mass = calculate_molar_mass(compound_formula)
+moles = mass_to_moles(compound_mass, compound_formula)
+
+print(f"The molar mass of {compound_formula} is: {molar_mass} g/mol")
+print(f"The number of moles of {compound_formula} is: {moles} moles")
